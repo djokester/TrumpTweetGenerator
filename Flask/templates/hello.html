@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+     <title>Reusable Form Demo</title>
+     <link rel="stylesheet" media="screen" href ="static/bootstrap.min.css">
+     <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+     <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" > </script>
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+ 
+ <script type="text/javascript" >
+	var socket = io.connect('http://0.0.0.0:8080');
+
+socket.on('myevent', function(msg){
+	document.getElementById('disp').innerHTML = msg;
+	console.log(msg);
+});
+
+function getoutput(){
+var tp = $('#name').val();
+socket.emit('generate',tp);
+}
+
+ </script>
+  <h2>Flask Web Form</h2>
+  <form role="form">
+    <div class="form-group">
+      <label for="name">Tweet</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Tweet it out man!">
+    </div>
+    <div onclick='getoutput();' class="btn btn-success">Generate Retweet</div>
+  </form>
+<div id='disp'>testval</div>
+ 
+  <br>
+</div>
+<br>            
+</div>
+</div>
+</body>
+</html>
